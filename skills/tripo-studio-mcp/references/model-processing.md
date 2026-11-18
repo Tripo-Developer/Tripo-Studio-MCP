@@ -8,14 +8,18 @@ When the user has no model ID, use `tripo_list_model_assets` to find a suitable 
 | Improve existing texture resolution | `tripo_texture_upscale`. Use a model with texture and a supported target quality. |
 | Unwrap UVs or produce PBR maps | Use `tripo_uv_unwrap` or `tripo_generate_pbr` for the requested operation. |
 | Split a model into parts | Use `tripo_segment_model` when advertised. Read the resulting model and verify its part directory before a part-dependent operation. |
-| Reduce or complete model geometry | Use `tripo_smart_low_poly_model` or `tripo_complete_model` only with a source that meets the live tool's prerequisites. Use an ordinary Remesh operation only if the server advertises a distinct tool for it. |
+| Remesh a whole model | Use `tripo_remesh_model` when advertised. Use an owned model without textures or parts, with an explicit `quad` choice and `face_limit` of 500–50000. Submit the original `idempotency_key` and `source_model_id`. |
+| Reduce or complete selected geometry | Use `tripo_smart_low_poly_model` or `tripo_complete_model` only with a source that meets the live tool's prerequisites. |
 | Make a separate copy | Use `tripo_copy_model` when the user wants a new copy. Read the resulting asset before editing it. |
 | Add a skeleton | `tripo_rig_model`. Use a successful whole model that is not already rigged. Choose `topology` for the subject and `spec` for the requested target. For example, use `topology: quadruped` and `spec: unity` for a four-legged character destined for Unity. The skeleton spec does not request file conversion. Deliver the existing model link unless the user also requests export or a different format. |
 | Generate motion from text | `tripo_text_to_motion` with ordered segments, each containing a prompt and duration in seconds. After task success, read `motion_id` with `tripo_get_motion_asset`. |
 | Apply motion to a rigged model | Use `tripo_retarget_model` with a compatible rigged source. See the argument mapping below. |
 
-After rigging succeeds, take `source_model_id` from the new model in
-`task.model_ids`. This request uses a full preset ID in `motion_id`.
+If the user supplies an already-rigged model ID and the motion reference,
+call retarget directly; do not inspect rig state, re-rig or list assets first.
+For example, substitute the supplied source and full preset ID in this call.
+If rigging was requested as a prior step, instead use its new `task.model_ids`
+result. Server validation decides compatibility.
 
 ```json
 {
@@ -36,3 +40,15 @@ When an operation requires part names, use the source model's server-provided `p
 For Smart Low Poly, check the requested face count against the triangle or quad limit. Supply explicit `quad`, `do_bake`, and valid `part_names` when required. If the requested budget cannot be represented, ask which constraint can change.
 
 A rigged model, standalone motion, and retargeted animation are separate outcomes. If retargeting fails, report the failed step and identify any verified intermediate model or motion the user can still use.
+
+## Part workflows and reporting
+
+Segmentation alone does not authorize completion. Complete only when the user
+requests missing geometry, using the newly segmented model when chaining steps.
+A successful asset read with `parts_known: false` blocks completion and does not
+establish whether parts exist. Re-reading the asset, checking an old task or
+using client node labels cannot establish the authoritative catalogue.
+
+When source inspection was requested before an edit, distinguish the edited
+result from the inspected original and provide their IDs and available links.
+If only the edited result was requested, omit the original.
