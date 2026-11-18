@@ -21,3 +21,8 @@ See [installation and updates](INSTALL.md) for commands and a manual Skill insta
 After connecting, try: “Use Tripo Studio MCP to list my five most recent model assets.”
 
 For a first creation, ask for a textured toy robot with a white body, orange joints, and blue eyes. Generation and editing may use credits. See the [credit rules](skills/tripo-studio-mcp/references/credit-rules.md) for reference costs.
+
+## Support
+
+- For installation, documentation, or plugin discovery issues, open a [GitHub issue](https://github.com/Tripo-Developer/Tripo-Studio-MCP/issues). Include your client version, installation method, and error message. Keep tokens, signed download links, and private assets out of public issues.
+- For sign-in, account, credit, or task issues, email [support@tripo3d.ai](mailto:support@tripo3d.ai). Include the task ID or error code if available.
