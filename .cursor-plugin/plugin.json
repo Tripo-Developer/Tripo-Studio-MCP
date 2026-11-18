@@ -1,0 +1,12 @@
+{
+  "name": "tripo-studio-mcp",
+  "version": "0.1.0",
+  "description": "Create, edit, and retrieve 3D assets with Tripo Studio MCP.",
+  "displayName": "Tripo Studio MCP",
+  "author": {
+    "name": "Tripo"
+  },
+  "skills": [
+    "./skills/tripo-studio-mcp"
+  ]
+}
