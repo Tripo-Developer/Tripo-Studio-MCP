@@ -10,6 +10,12 @@
 
 For single-image tools use exactly one of the supported image ID and upload-key fields. A view label, task ID, local path, or URL cannot substitute for either.
 
+Product aliases use Smart Mesh P1 for Nexus v1 and P2 for Nexus v2.
+When the connected schema advertises them, map P1 to
+`Nexus-v1.0-20260214` and P2 to `Nexus-v2.0-20260801`, with
+`family: smart_mesh`. Keep the user's explicit topology and face count.
+Consult the schema if an advertised version differs.
+
 The three modeling tools require explicit `family`, `model_version`, and `texture`. Choose a family and version that meet the request. The current contract pairs HD with releases such as `v3.1-20260211` and Smart Mesh with releases such as `Nexus-v2.0-20260801`. Confirm the connected schema and version-specific constraints. In particular:
 
 - Use the live `face_limit` guidance for the chosen family, version, topology and quality. On the current route the minimum and default are 500. HD allows 50,000 quad, 1,000,000 standard triangle, or 2,000,000 detailed triangle faces (v3.1). Smart Mesh Nexus v1 allows 20,000 triangle faces. Nexus v2 allows 25,000 quad or 50,000 triangle faces. Set `quad` explicitly when topology matters. Ask which constraint can change if the requested count is outside the allowed range.
@@ -60,3 +66,29 @@ submitting the corrected request. If acceptance is unclear, recover the
 original request first.
 
 Use [Recovery](recovery.md) for pending or uncertain tasks.
+
+For an advice-only request about already contradictory view labels, explain the
+mismatch using the supplied labels and task ID and ask for corrected inputs or
+a verified mapping without calling tools.
+
+If the user says the front view or every additional view is unavailable,
+multiview modeling is blocked. Ask for the missing required view and stop;
+do not search for unrelated assets or substitute another input workflow unless
+requested. A missing prerequisite is not permission to discover replacements.
+
+Check whether required view inputs exist before any asset discovery. A declared
+missing front or additional view ends that branch; listing assets does not cure
+a missing input or authorize substitutes. Advice about a reported label mismatch
+uses the supplied evidence without querying tasks or assets. Request a corrected
+mapping only when needed to continue a separately authorized modeling step.
+
+Task and asset metadata describe labels, not image pixels. A user-reported
+contradiction already blocks modeling; do not re-read metadata to reconfirm it.
+Ask for corrected inputs or mapping. Perform visual inspection only when
+explicitly requested and supported by the host's viewer.
+
+Before a generated-image upload handoff, establish that the host can download
+bytes and PUT them to an upload grant. If these capabilities are absent, briefly
+ask for an uploaded key or file and pause before asset fetches or grants. Do not
+speculate about unavailable transfer tools. An explicit self-upload request may
+instead use the private grant handoff described in Delivery.

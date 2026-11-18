@@ -17,7 +17,9 @@ URL and headers out of logs and shared conversations. Request a fresh grant if t
 
 ## Deliver assets and exports
 
-An existing `model_url` that meets the requested format is the deliverable.
+Inspect the successful result's model asset before any export or format write
+when delivering a model download. An existing `model_url` that meets the requested
+format is the deliverable; a same-format link request does not request export.
 For an expired link, re-read that same asset. A request for a GLB link does
 not require a new export when the existing link already points to a GLB.
 After an import succeeds, read the new model asset before converting it.
@@ -83,3 +85,30 @@ returned HTTP 403 and curl with HTTP/2 returned HTTP 200 on the same fresh
 signed URL. Both converted files imported into Blender 5.1.2. This was a
 step-by-step toolchain check. Independent Agent execution and the encrypted
 GLB path still need end-to-end verification.
+
+
+If a completed export record has no download_url, report that the export file
+cannot be retrieved through this response and stop. A source model link is a
+different file. Avoid looking up the original model or creating another export
+to fill the missing link unless the user requests that alternative. End the
+reply at that blocker; do not append an unsolicited suggestion or offer to
+re-export, switch formats or supply the source file instead.
+
+An already-uploaded model key is ready for `tripo_import_model.resource_key`.
+Do not open it as a local file, request another upload or search for a substitute.
+Follow the import task; a failed import blocks dependent conversion.
+
+Deliver only requested assets or views. If the response contains several views
+but the user asks for one, select that view by its authoritative label; do not
+append a table of the others or fetch their files solely for completeness.
+
+Treat an uploaded `resource_key` as opaque remote input, never a local file_path.
+For an explicitly requested import with an existing uploaded key, call
+`tripo_import_model` directly using the input schema, for example:
+
+```json
+{"resource_key":"<uploaded key>","idempotency_key":"<new-operation key>"}
+```
+
+A supplied key identifies this write; it does not establish an uncertain prior
+submission. A conditional recovery instruction applies only after submission.
