@@ -1,0 +1,13 @@
+{
+  "name": "tripo-studio",
+  "owner": {
+    "name": "Tripo"
+  },
+  "plugins": [
+    {
+      "name": "tripo-studio-mcp",
+      "source": "./",
+      "description": "Create, edit, and retrieve 3D assets with Tripo Studio MCP."
+    }
+  ]
+}
