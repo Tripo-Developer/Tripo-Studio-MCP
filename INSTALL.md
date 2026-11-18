@@ -2,6 +2,28 @@
 
 The plugin uses the same Skill and references on all three clients. Connect Tripo Studio MCP and authorize your account separately if you want to call its tools.
 
+## Quick install with the Skills CLI
+
+With Node.js 22.20 or later, run this from your project directory:
+
+```sh
+npx skills add Tripo-Developer/Tripo-Studio-MCP --skill tripo-studio-mcp
+```
+
+The CLI can detect your current agent. To target a specific client, add
+`-a codex`, `-a claude-code`, or `-a cursor`. Install for the current
+project, or add `-g` to install for your user account. Choose either
+the Skills CLI or the native plugin for each client to avoid duplicate
+Skill entries.
+
+Open a new session and follow [Verify the Skill](#verify-the-skill).
+Use `npx skills check` to check for updates and
+`npx skills update tripo-studio-mcp` to apply them. Use
+`npx skills remove tripo-studio-mcp` to uninstall, adding `-g` if installed globally.
+
+The Skills CLI installs the instructions and references. Configure the
+Tripo Studio MCP connection in your client and sign in separately.
+
 ## Codex
 
 Run these commands in a terminal:
