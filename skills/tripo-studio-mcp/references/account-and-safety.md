@@ -13,8 +13,9 @@ plan. State the documented base credits, supported additive charges and entitlem
 conditions. Label any arithmetic as a rule-based reference, not the user's actual
 charge. If a parameter or mapping is unclear, explain the missing item rather than
 guessing. A blank credit cell is not zero; a non-credit operation may still require
-membership, a quota or a free-trial allowance. Resource/task lists cannot establish
-remaining credits, remaining trials, a refund or the final amount charged.
+membership, a quota or a Studio-side trial allowance. MCP cannot query or use an
+account's remaining trial uses. Resource/task lists cannot establish remaining
+credits, a refund or the final amount charged.
 
 If the user says not to generate, answer the billing question and stop without
 tool calls, an unrelated parameter table or a future submission plan. For current
