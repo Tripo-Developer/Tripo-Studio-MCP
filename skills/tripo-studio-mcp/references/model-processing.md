@@ -17,14 +17,15 @@ When the user has no model ID, use `tripo_list_model_assets` to find a suitable 
 
 If the user supplies an already-rigged model ID and the motion reference,
 call retarget directly; do not inspect rig state, re-rig or list assets first.
-For example, substitute the supplied source and full preset ID in this call.
+For example, use the following walking preset for a rigged Mixamo biped.
+Substitute the supplied source model ID and preserve any user-specified preset ID.
 If rigging was requested as a prior step, instead use its new `task.model_ids`
 result. Server validation decides compatibility.
 
 ```json
 {
   "source_model_id": "01234567-89ab-4def-8123-456789abcdef",
-  "motion_id": "preset:humanoid:walk",
+  "motion_id": "preset:biped:walk",
   "motion_source": "preset",
   "idempotency_key": "<stable key for this retarget operation>"
 }
