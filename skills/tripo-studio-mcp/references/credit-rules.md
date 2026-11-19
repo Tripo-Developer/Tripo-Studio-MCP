@@ -3,7 +3,8 @@
 Use these values as reference estimates. Check [Tripo Studio](https://studio.tripo3d.ai/) for current plan terms and account allowances. The connected tool catalogue defines which operations are available.
 
 - Check the plan, feature restrictions, base credits and add-ons together. A missing price does not establish that an operation is free.
-- An operation that consumes no credits can still require membership, export quota, storage capacity or a trial allowance.
+- An operation that consumes no credits can still require membership, export quota, storage capacity or a Studio-side trial allowance.
+- MCP cannot query or use an account's remaining trial uses. Do not present Studio-side trial terms as MCP availability or as a confirmed account entitlement.
 - If an applicable cost or entitlement is unclear, explain what needs verification before estimating an account-specific charge.
 
 ## Modeling base credits
@@ -18,11 +19,11 @@ permissions and allowances are not evidence of the current account's tier.
 | Multiview HD, same three versions | 15 | Basic unavailable; paid plans available |
 | Text or single-image Smart Mesh P1 | 35 | Basic and paid plans marked available |
 | Multiview Smart Mesh P1 | 35 | Basic unavailable; paid plans available |
-| Text, image or multiview Smart Mesh P2 | 100 | Paid plans available; Basic only a shared total of 2 P2 trial uses, not 2 per tool |
+| Text, image or multiview Smart Mesh P2 | 100 | Paid plans available; any Basic trial terms are Studio-side only. MCP cannot query or use remaining trial uses |
 
 Use P1/P2 aliases only when supported by the connected schema; see
-[Generation](generation.md). Do not assume a trial is unused or that an account
-can afford the listed cost.
+[Generation](generation.md). MCP cannot query or use remaining trial uses, and a
+reference cost does not establish that an account can afford the operation.
 
 ## Options and processing rules
 
@@ -30,11 +31,11 @@ can afford the listed cost.
 | --- | --- | --- |
 | 2K texture | 10 | Base texture item, not the modeling base price |
 | 4K texture | Additional 10 on 2K | Texture component totals 20 when that combination applies |
-| 8K texture | Additional 20 on 2K | Texture component totals 30 when applicable; eligibility/trial notes conflict, so do not promise a plan's access |
+| 8K texture | Additional 20 on 2K | Texture component totals 30 when applicable; eligibility is Studio-side. MCP cannot query or use remaining trial uses, so do not promise access |
 | HD generation quads | Additional 5 | Listed for those HD versions; do not apply automatically to P1/P2 |
 | HD detailed geometry | 15 | Applies to detailed geometry when supported by the selected model version |
-| Part generation | 30 | Member feature; Basic shares 1 trial with segmentation. May apply in addition to generation. MCP requires texture=false |
-| Segmentation | 40 | Member feature; shared Basic trial as above |
+| Part generation | 30 | Member feature; any Basic trial terms are Studio-side only. MCP cannot query or use remaining trial uses. May apply in addition to generation. MCP requires texture=false |
+| Segmentation | 40 | Member feature; any Basic trial terms are Studio-side only. MCP cannot query or use remaining trial uses |
 | Triangle retopology | 5 | Distinguish from smart low-poly |
 | Quad retopology | Additional 5 on triangle retopology | 10 total for the two retopology components when applicable |
 | Smart low-poly | 30 | Basic unavailable; paid plans available |
@@ -43,10 +44,10 @@ can afford the listed cost.
 | Rigging/animation | 20 | Do not apply this row to every motion or retarget request |
 | Motion generation | 20 | The reference does not specify per-request, per-segment or duration-based units; do not invent them |
 | Image upscale | 10 per image | Basic unavailable; Starter/Pro/Max shown available; Check Advanced eligibility in Studio |
-| UV generation | First 2 trial uses; then 20 for Pro/Max | Basic/Starter shown trial-only; no remaining trial count is available. UV retry is a separate rule, not the MCP UV unwrap operation |
+| UV generation | Studio-side trial or paid terms | MCP cannot query or use remaining trial uses. UV retry is a separate rule, not the MCP UV unwrap operation |
 | Texture upscale | 10 | Member feature with 8K-only-Max note; Confirm the applicable option and total in Studio |
 
-Check current Studio terms for 8K eligibility and trial allowances.
+Check current Studio terms for 8K eligibility. MCP cannot query or use remaining trial uses.
 
 ## Explicitly non-credit features
 
@@ -69,7 +70,8 @@ exceptions can have different rules.
 
 For “P2 with textures, about how many credits; do not generate,” explain that
 the documented modeling base is **100 credits**, with applicable texture charges
-and membership/trial conditions. If texture resolution is unspecified, do not
+and any Studio-side eligibility conditions. MCP cannot query or use remaining
+trial uses. If texture resolution is unspecified, do not
 invent one to give a single total. State that this is a reference rule, not the
 account's final charge, then stop without tools or a submission offer.
 
