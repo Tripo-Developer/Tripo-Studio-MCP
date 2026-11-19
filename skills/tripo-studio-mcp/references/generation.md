@@ -20,7 +20,7 @@ The three modeling tools require explicit `family`, `model_version`, and `textur
 
 - Use the live `face_limit` guidance for the chosen family, version, topology and quality. On the current route the minimum and default are 500. HD allows 50,000 quad, 1,000,000 standard triangle, or 2,000,000 detailed triangle faces (v3.1). Smart Mesh Nexus v1 allows 20,000 triangle faces. Nexus v2 allows 25,000 quad or 50,000 triangle faces. Set `quad` explicitly when topology matters. Ask which constraint can change if the requested count is outside the allowed range.
 - Send an explicitly requested `symmetry: true` or `false` only for Smart Mesh Nexus v2. Omit it for HD and Nexus v1. If symmetry is required for an unsupported version, ask whether switching to Nexus v2 is acceptable.
-- With `texture: false`, omit `pbr`, `texture_quality`, and `delight`. HD generation with `generate_parts: true` requires `texture: false` and an explicit `segmentation_granularity`. Ask whether to prioritize parts or texture if the user requests both in one generation.
+- With `texture: false`, omit `pbr`, `texture_quality`, and `delight`. Passing `false` for a boolean field still counts as supplying it. HD generation with `generate_parts: true` requires `texture: false` and an explicit `segmentation_granularity`. Ask whether to prioritize parts or texture if the user requests both in one generation.
 - Do not infer that every field in a shared schema works for every family. HD-only options include negative text prompts and geometry quality. If the connected tool cannot represent a user requirement, explain it or ask about an acceptable alternative.
 
 For example, an untextured HD model from a prompt on a connection advertising this version:
