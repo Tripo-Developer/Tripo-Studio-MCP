@@ -29,9 +29,9 @@ reference cost does not establish that an account can afford the operation.
 
 | Feature | Documented credits | Conditions and interpretation |
 | --- | --- | --- |
-| 2K texture | 10 | Base texture item, not the modeling base price |
-| 4K texture | Additional 10 on 2K | Texture component totals 20 when that combination applies |
-| 8K texture | Additional 20 on 2K | Texture component totals 30 when applicable; eligibility is Studio-side. MCP cannot query or use remaining trial uses, so do not promise access |
+| 2K texture (`texture_quality: standard`) | 10 | Base texture item, not the modeling base price |
+| 4K texture (`texture_quality: detailed`) | Additional 10 on 2K | Texture component totals 20 when that combination applies |
+| 8K texture (`texture_quality: extreme`) | Additional 20 on 2K | Texture component totals 30 when applicable; eligibility is Studio-side. MCP cannot query or use remaining trial uses, so do not promise access |
 | HD generation quads | Additional 5 | Listed for those HD versions; do not apply automatically to P1/P2 |
 | HD detailed geometry | 15 | Applies to detailed geometry when supported by the selected model version |
 | Part generation | 30 | Member feature; any Basic trial terms are Studio-side only. MCP cannot query or use remaining trial uses. May apply in addition to generation. MCP requires texture=false |
