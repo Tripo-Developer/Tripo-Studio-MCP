@@ -24,8 +24,9 @@ An explicit new operation starts with its write, even if the user supplies an
 idempotency key or conditional recovery instruction. Recover only after that
 write's uncertain result. With required IDs and arguments, call directly. Ownership, rig state and eligibility are server checks, not reasons for
 preflight reads. Read only for requested inspection or actual missing arguments,
-such as authoritative part names. A user-declared missing prerequisite blocks the
-step; do not reinterpret it as asset discovery or offer forbidden substitutes.
+such as authoritative part names or a live preset motion ID. A user-declared
+missing prerequisite blocks the step; do not reinterpret it as asset discovery or
+offer forbidden substitutes.
 Validate required view combinations before discovery: declared missing required
 views stop multiview work, even if asset lists exist. Advice-only mismatch
 questions require no calls. Search only for requested source discovery. Check generated-image upload
