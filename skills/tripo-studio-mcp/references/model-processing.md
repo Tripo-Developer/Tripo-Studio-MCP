@@ -1,6 +1,6 @@
 # Model processing and animation
 
-When the user has no model ID, use `tripo_list_model_assets` to find a suitable owned asset. If several match, confirm the intended source. With a supplied ID and required arguments, submit directly. Use `tripo_get_model_asset` first when the user requests verification or when a required fact must come from the asset, such as the part catalogue. Pass its ID as `source_model_id` where the schema calls for it. Inspect the result of each successful step before using it as the source of the next step.
+When an operation needs a source model and the user has no model ID, use `tripo_list_model_assets` to find a suitable owned asset. If several match, confirm the intended source. With a supplied ID and required arguments, submit directly. Use `tripo_get_model_asset` first when the user requests verification or when a required fact must come from the asset, such as the part catalogue. Pass its ID as `source_model_id` where the schema calls for it. Inspect the result of each successful step before using it as the source of the next step.
 
 | User goal | Tool and prerequisites |
 | --- | --- |
@@ -13,28 +13,26 @@ When the user has no model ID, use `tripo_list_model_assets` to find a suitable 
 | Make a separate copy | Use `tripo_copy_model` when the user wants a new copy. Read the resulting asset before editing it. |
 | Add a skeleton | `tripo_rig_model`. Use a successful whole model that is not already rigged. Choose `topology` for the subject and `spec` for the requested target. For example, use `topology: quadruped` and `spec: unity` for a four-legged character destined for Unity. The skeleton spec does not request file conversion. Deliver the existing model link unless the user also requests export or a different format. |
 | Generate motion from text | `tripo_text_to_motion` with ordered segments, each containing a prompt and duration in seconds. After task success, read `motion_id` with `tripo_get_motion_asset`. |
+| Browse available preset motions | `tripo_list_motion_presets` lists enabled presets in the connected environment. |
 | Apply motion to a rigged model | Use `tripo_retarget_model` with a compatible rigged source. See the argument mapping below. |
 
-If the user supplies an already-rigged model ID and the motion reference,
-call retarget directly; do not inspect rig state, re-rig or list assets first.
-For example, use the following walking preset for a rigged Mixamo biped.
-Substitute the supplied source model ID and preserve any user-specified preset ID.
-If rigging was requested as a prior step, instead use its new `task.model_ids`
-result. Server validation decides compatibility.
+When the user describes a preset by name or action, use
+`tripo_list_motion_presets` to look it up. Supply the exact `topology` filter
+when known, or omit it to browse all topologies. Match the requested action and
+rig using the returned `title`, `action_type` and `topology`. If you need another
+page, pass `next_page_token` back as `page_token` with the same filter. If
+several presets fit, ask the user to choose when the differences matter. If the
+catalogue is unavailable or has no suitable match, explain what blocked preset
+selection and stop that step.
 
-```json
-{
-  "source_model_id": "01234567-89ab-4def-8123-456789abcdef",
-  "motion_id": "preset:biped:walk",
-  "motion_source": "preset",
-  "idempotency_key": "<stable key for this retarget operation>"
-}
-```
-
-For an existing motion asset, pass its UUID as `motion_id` and use
-`motion_source: user_generated`. After success, copy the model ID and clip
-name from `task.retarget_result`. Read the model only if the user needs its
-asset or link.
+For a preset, copy `motion_id` exactly from the catalogue and submit it with
+`motion_source: preset`. An explicit preset ID from the user can be submitted
+directly. For an existing user-generated motion asset, pass its UUID as
+`motion_id` with `motion_source: user_generated`. Pass the supplied rigged model
+ID as `source_model_id`, or use the successful rigging task's new `task.model_ids`
+result when chaining. The server validates compatibility. After success, copy the
+model ID and clip name from `task.retarget_result`. Read the model only if the
+user needs its asset or link.
 
 When an operation requires part names, use the source model's server-provided `part_names` with `parts_known=true`. For completion of selected parts, pass their names from that catalogue. The current tool can use the full catalogue when names are omitted; a request for selected parts needs explicit names. If the required catalogue or selections are unavailable, stop that step and explain what input is needed. Geometry node labels from a downloaded file are useful for display and selection in the client. Use the server-provided directory for tool arguments.
 
