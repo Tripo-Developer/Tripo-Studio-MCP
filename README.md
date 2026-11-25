@@ -13,7 +13,7 @@ Generation and editing depend on your Studio account permissions and available c
 
 ## Quick start
 
-1. **Install the Skill** from your project directory.
+1. **Install the Skill** from your project directory with Node.js 22.20 or later.
 
    ```sh
    npx skills add Tripo-Developer/Tripo-Studio-MCP --skill tripo-studio-mcp
