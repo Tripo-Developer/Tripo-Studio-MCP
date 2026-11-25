@@ -21,13 +21,13 @@ Generation and editing depend on your Studio account permissions and available c
 
    To target a specific client, add `-a codex`, `-a claude-code`, or `-a cursor`. The [installation guide](INSTALL.md) also covers native plugins, manual installation, and updates.
 
-2. **Connect to Tripo Studio MCP** in your client and authorize your account. Start at [Tripo Studio MCP setup](https://studio.tripo3d.ai/mcp).
+2. **Connect to Tripo Studio MCP** in your client and authorize your account. Follow the [connection steps for your client](INSTALL.md#connect-to-tripo-studio-mcp).
 
 3. **Verify the connection** in a new conversation with a read-only request.
 
-   > Use Tripo Studio MCP to list my five most recent model assets.
+   > Use the Tripo Studio MCP connection I just authorized to list up to two of my model assets and two of my recent model tasks.
 
-   An empty list is a successful result for an account with no models.
+   Empty lists are valid for a new account when the tool calls succeed.
 
 ## Try your first model
 
