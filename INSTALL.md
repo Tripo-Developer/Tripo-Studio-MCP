@@ -1,6 +1,6 @@
 # Install the Tripo Studio MCP Skill
 
-The plugin uses the same Skill and references on all three clients. Connect Tripo Studio MCP and authorize your account separately if you want to call its tools.
+Codex, Claude Code, and Cursor use the same Skill and references. To call Studio tools, also [connect Tripo Studio MCP and authorize your account](#connect-to-tripo-studio-mcp).
 
 ## Quick install with the Skills CLI
 
@@ -21,8 +21,8 @@ Use `npx skills check` to check for updates and
 `npx skills update tripo-studio-mcp` to apply them. Use
 `npx skills remove tripo-studio-mcp` to uninstall, adding `-g` if installed globally.
 
-The Skills CLI installs the instructions and references. Configure the
-Tripo Studio MCP connection in your client and sign in separately.
+The Skills CLI installs the instructions and references. Next, [connect Tripo
+Studio MCP](#connect-to-tripo-studio-mcp) in your client and sign in.
 
 ## Codex
 
@@ -57,10 +57,73 @@ git clone https://github.com/Tripo-Developer/Tripo-Studio-MCP.git "$HOME/.cursor
 
 Restart Cursor or run **Developer: Reload Window**, then open **Customize** and look for **Tripo Studio MCP**. To update, pull the checkout and reload Cursor. To uninstall, move the checkout out of the local plugin directory and reload.
 
+For other compatible clients, install the entire [`skills/tripo-studio-mcp/`](skills/tripo-studio-mcp/) folder using the client's Skill installation instructions. Keep `SKILL.md` and `references/` together when installing or updating.
+
+## Connect to Tripo Studio MCP
+
+Set up the production connection for your client, then complete the Tripo sign-in in your browser. If an existing connection matches the production URL and OAuth settings below, use its existing name to sign in again.
+
+### Connect in Codex
+
+```sh
+codex mcp add tripo --url https://msapi.tripo3d.ai/mcp --oauth-client-id studio-codex
+```
+
+Complete the browser prompt. If a matching connection is already configured or the browser does not open, run `codex mcp login tripo` using your connection name. If an existing entry uses a different URL or OAuth client ID, update that entry before signing in. Open a new Codex session after sign-in.
+
+### Connect in Claude Code
+
+```sh
+claude mcp add --transport http --scope user --client-id studio-claude-code \
+  --callback-port 3000 tripo https://msapi.tripo3d.ai/mcp
+claude mcp login tripo
+```
+
+You can also open `/mcp` in Claude Code, select `tripo`, and follow the browser sign-in prompt.
+
+### Connect in Cursor
+
+Add the `tripo` entry to `~/.cursor/mcp.json` for all projects or to `.cursor/mcp.json` for the current project. Keep your other server entries.
+
+```json
+{
+  "mcpServers": {
+    "tripo": {
+      "url": "https://msapi.tripo3d.ai/mcp",
+      "auth": {
+        "CLIENT_ID": "studio-cursor",
+        "scopes": [
+          "openid",
+          "offline_access",
+          "asset:read",
+          "asset:download",
+          "asset:upload",
+          "asset:create",
+          "asset:edit",
+          "task:read",
+          "task:cancel",
+          "offline"
+        ]
+      }
+    }
+  }
+}
+```
+
+In **Customize → MCPs**, select **Authenticate** or **Sign in** for `tripo`. After approving access in the browser, check that the connection is shown as **Connected**.
+
+### Connect in Manus
+
+Open **Plugins**, search for **Tripo AI**, and follow Manus's authorization prompts. This connects your Studio account through the Manus catalog.
+
 ## Verify the Skill
 
 In a new conversation, ask: “Use the Tripo Studio MCP Skill and read its credit rules. What is the reference base cost for an HD text-to-model request?” The bundled reference should give 15 credits for the base operation before applicable add-ons. This check works without calling MCP.
 
-After configuring MCP and signing in, ask the agent to list your five most recent model assets. An empty list can be a successful result for a new account.
+## Verify the MCP connection
 
-For other compatible clients, install the entire [`skills/tripo-studio-mcp/`](skills/tripo-studio-mcp/) folder using the client's Skill installation instructions. Keep `SKILL.md` and `references/` together when installing or updating.
+In a new conversation, ask the agent to use the connection you just authorized.
+
+> Use the Tripo Studio MCP connection I just authorized. List up to two of my model assets and two of my recent model tasks. Use read-only tools only.
+
+Use the actual tool results to confirm the connection. Empty lists are valid for a new account when both calls succeed.

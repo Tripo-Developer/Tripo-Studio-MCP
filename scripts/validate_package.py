@@ -15,6 +15,7 @@ MARKETPLACES = (
 )
 PUBLIC_HOSTS = {"studio.tripo3d.ai", "www.tripo3d.ai", "gltf-transform.dev",
                 "agent-plugins.org", "github.com"}
+PUBLIC_MCP_ENDPOINT = "https://msapi.tripo3d.ai/mcp"
 INTERNAL = re.compile(
     r"feishu\.cn|larksuite\.com|devops\.tripo3d\.ai|vast-internal\.com|"
     r"\b(?:env-forrest-mcp|env-creation|env-base)\b|\.svc\.cluster\.local|"
@@ -100,7 +101,7 @@ def validate(root):
             try:
                 url = urlsplit(raw)
                 github_repo = url.path.lower().split("/")[1:3]
-                allowed = (url.scheme == "https" and url.hostname in PUBLIC_HOSTS
+                allowed = raw == PUBLIC_MCP_ENDPOINT or (url.scheme == "https" and url.hostname in PUBLIC_HOSTS
                            and not (url.username or url.password or url.port)
                            and (url.hostname != "github.com" or github_repo in (
                                ["tripo-developer", "tripo-studio-mcp"],
