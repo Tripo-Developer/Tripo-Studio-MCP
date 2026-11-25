@@ -61,7 +61,7 @@ For other compatible clients, install the entire [`skills/tripo-studio-mcp/`](sk
 
 ## Connect to Tripo Studio MCP
 
-Set up the production connection for your client, then complete the Tripo sign-in in your browser. If you already have the production server configured, use its existing name to sign in again.
+Set up the production connection for your client, then complete the Tripo sign-in in your browser. If an existing connection matches the production URL and OAuth settings below, use its existing name to sign in again.
 
 ### Connect in Codex
 
@@ -69,7 +69,7 @@ Set up the production connection for your client, then complete the Tripo sign-i
 codex mcp add tripo --url https://msapi.tripo3d.ai/mcp --oauth-client-id studio-codex
 ```
 
-Complete the browser prompt. If the server is already configured or the browser does not open, run `codex mcp login tripo` using your connection name. Open a new Codex session after sign-in.
+Complete the browser prompt. If a matching connection is already configured or the browser does not open, run `codex mcp login tripo` using your connection name. If an existing entry uses a different URL or OAuth client ID, update that entry before signing in. Open a new Codex session after sign-in.
 
 ### Connect in Claude Code
 
