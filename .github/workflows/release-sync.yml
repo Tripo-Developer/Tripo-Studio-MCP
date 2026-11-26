@@ -80,7 +80,8 @@ jobs:
           CHANGELOG="${RELEASE_NOTES:-Release v${VERSION} of Tripo Studio MCP Skill}"
           npx --yes clawhub login --token "$CLAWHUB_TOKEN"
           npx --yes clawhub whoami
-          npx --yes clawhub skill publish ./skills/tripo-studio-mcp \
+          set +e
+          OUTPUT=$(npx --yes clawhub skill publish ./skills/tripo-studio-mcp \
             --slug tripo-studio-mcp \
             --name "Tripo Studio MCP" \
             --owner tripo-ai \
@@ -89,10 +90,17 @@ jobs:
             --source-commit "$COMMIT_SHA" \
             --source-ref "v${VERSION}" \
             --source-path "skills/tripo-studio-mcp" \
-            --changelog "$CHANGELOG" || {
-              echo "Checking if version ${VERSION} is already published under @tripo-ai..."
-              npx --yes clawhub inspect tripo-studio-mcp | grep -F "v${VERSION}"
-            }
+            --changelog "$CHANGELOG" 2>&1)
+          STATUS=$?
+          set -e
+          echo "$OUTPUT"
+          if [ $STATUS -ne 0 ]; then
+            if echo "$OUTPUT" | grep -q "already exists"; then
+              echo "Version ${VERSION} is already published on ClawHub under @tripo-ai."
+            else
+              exit $STATUS
+            fi
+          fi
 
       - name: Trigger Skills.sh index refresh
         run: |
