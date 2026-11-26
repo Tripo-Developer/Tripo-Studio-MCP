@@ -18,7 +18,8 @@ PUBLIC_HOSTS = {"studio.tripo3d.ai", "www.tripo3d.ai", "gltf-transform.dev",
 PUBLIC_EXACT_URLS = {
     "https://msapi.tripo3d.ai/mcp",
     "https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp",
-    "https://clawhub.ai/tripo-ai/tripo-studio-mcp",
+    "https://clawhub.ai/tripo-ai/skills/tripo-studio-mcp",
+    "https://cursor.com/marketplace",
 }
 INTERNAL = re.compile(
     r"feishu\.cn|larksuite\.com|devops\.tripo3d\.ai|vast-internal\.com|"

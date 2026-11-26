@@ -19,9 +19,13 @@ Generation and editing depend on your Studio account permissions and available c
    npx skills add Tripo-Developer/Tripo-Studio-MCP --skill tripo-studio-mcp
    ```
 
-   You can also find this Skill in the [Skills.sh directory](https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp) and on [ClawHub](https://clawhub.ai/tripo-ai/tripo-studio-mcp).
+   You can also browse and install this Skill from the public registries that sync with this repository:
 
-   To target a specific client, add `-a codex`, `-a claude-code`, or `-a cursor`. The [installation guide](INSTALL.md) also covers native plugins, manual installation, and updates.
+   - **Skills.sh:** [tripo-developer/tripo-studio-mcp](https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp) (`npx skills add Tripo-Developer/Tripo-Studio-MCP --skill tripo-studio-mcp`)
+   - **ClawHub (OpenClaw):** [tripo-ai/skills/tripo-studio-mcp](https://clawhub.ai/tripo-ai/skills/tripo-studio-mcp) (`openclaw skills install tripo-studio-mcp` or `npx clawhub install tripo-studio-mcp`)
+   - **Cursor Marketplace:** [Tripo Studio MCP (`tripo-studio-mcp`)](https://cursor.com/marketplace) under publisher **Tripo AI (`@tripo-ai`)**, or via local plugin checkout in the [installation guide](INSTALL.md#cursor)
+
+   To target a specific client with the Skills CLI, add `-a codex`, `-a claude-code`, or `-a cursor`. The [installation guide](INSTALL.md) also covers native plugins, manual installation, and updates.
 
 2. **Connect to Tripo Studio MCP** in your client and authorize your account. Follow the [connection steps for your client](INSTALL.md#connect-to-tripo-studio-mcp).
 
