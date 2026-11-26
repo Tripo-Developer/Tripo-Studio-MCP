@@ -16,7 +16,7 @@ project, or add `-g` to install for your user account. Choose either
 the Skills CLI or the native plugin for each client to avoid duplicate
 Skill entries.
 
-The [Skills.sh entry](https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp) points to this GitHub repository.
+The [Skills.sh entry](https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp) and [ClawHub listing](https://clawhub.ai/tripo-ai/skills/tripo-studio-mcp) point to this GitHub repository and update automatically when a new release is tagged.
 
 Open a new session and follow [Verify the Skill](#verify-the-skill).
 Use `npx skills check` to check for updates and
@@ -50,14 +50,24 @@ Use `/reload-plugins` or start a new session. To update, refresh the marketplace
 
 ## Cursor
 
-With local plugin imports enabled, clone the repository into Cursor's local plugin directory:
+You can install **Tripo Studio MCP (`tripo-studio-mcp`)** under publisher **Tripo AI (`@tripo-ai`)** from the [Cursor Marketplace](https://cursor.com/marketplace), or clone the repository directly into Cursor's local plugin directory:
 
 ```sh
 mkdir -p "$HOME/.cursor/plugins/local"
 git clone https://github.com/Tripo-Developer/Tripo-Studio-MCP.git "$HOME/.cursor/plugins/local/tripo-studio-mcp"
 ```
 
-Restart Cursor or run **Developer: Reload Window**, then open **Customize** and look for **Tripo Studio MCP**. To update, pull the checkout and reload Cursor. To uninstall, move the checkout out of the local plugin directory and reload.
+Restart Cursor or run **Developer: Reload Window**, then open **Customize** and look for **Tripo Studio MCP**. To update a local checkout, pull the latest commit and reload Cursor. To uninstall, remove the plugin in Cursor or move the checkout out of the local plugin directory and reload.
+
+## OpenClaw / ClawHub
+
+Install the published Skill from [ClawHub (`@tripo-ai`)](https://clawhub.ai/tripo-ai/skills/tripo-studio-mcp):
+
+```sh
+openclaw skills install tripo-studio-mcp
+# or with the ClawHub CLI
+npx clawhub install tripo-studio-mcp
+```
 
 For other compatible clients, install the entire [`skills/tripo-studio-mcp/`](skills/tripo-studio-mcp/) folder using the client's Skill installation instructions. Keep `SKILL.md` and `references/` together when installing or updating.
 
