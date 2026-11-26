@@ -18,6 +18,7 @@ PUBLIC_HOSTS = {"studio.tripo3d.ai", "www.tripo3d.ai", "gltf-transform.dev",
 PUBLIC_EXACT_URLS = {
     "https://msapi.tripo3d.ai/mcp",
     "https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp",
+    "https://clawhub.ai/tripo-ai/tripo-studio-mcp",
 }
 INTERNAL = re.compile(
     r"feishu\.cn|larksuite\.com|devops\.tripo3d\.ai|vast-internal\.com|"
@@ -74,6 +75,10 @@ def validate(root):
                 or len(entries) != 1 or not isinstance(entries[0], dict)
                 or entries[0].get("name") != NAME or entries[0].get("source") != source):
             problem(path, "expected one marketplace entry pointing to the root plugin")
+        elif path.startswith(".cursor-plugin"):
+            entry_version = entries[0].get("version")
+            if not isinstance(entry_version, str) or entry_version not in versions:
+                problem(path, "expected Cursor marketplace plugin entry version to match plugin.json")
 
     entry = root / SKILL / "SKILL.md"
     try:

@@ -16,7 +16,7 @@ project, or add `-g` to install for your user account. Choose either
 the Skills CLI or the native plugin for each client to avoid duplicate
 Skill entries.
 
-The [Skills.sh entry](https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp) points to this GitHub repository.
+The [Skills.sh entry](https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp) and [ClawHub listing](https://clawhub.ai/tripo-ai/tripo-studio-mcp) point to this GitHub repository.
 
 Open a new session and follow [Verify the Skill](#verify-the-skill).
 Use `npx skills check` to check for updates and
