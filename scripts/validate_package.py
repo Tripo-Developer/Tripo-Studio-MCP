@@ -55,8 +55,12 @@ def validate(root):
             problem(path, "expected a release version such as 0.1.0")
         else:
             versions.add(version)
-        if path.startswith(".cursor-plugin") and data.get("skills") != [f"./{SKILL}"]:
-            problem(path, "expected the shared Skill path")
+        if path.startswith(".cursor-plugin"):
+            if data.get("skills") != [f"./{SKILL}"]:
+                problem(path, "expected the shared Skill path")
+            logo = data.get("logo")
+            if not isinstance(logo, str) or not (root / logo).is_file():
+                problem(path, "expected a valid relative logo file path")
         if any(key in data for key in ("mcp", "mcpServers", "apps")):
             problem(path, "keep MCP connection configuration outside the public package")
     if len(versions) > 1:

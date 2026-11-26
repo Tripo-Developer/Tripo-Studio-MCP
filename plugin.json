@@ -2,5 +2,10 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "tripo-studio-mcp",
   "version": "0.1.0",
-  "description": "Guide your agent through Tripo Studio MCP workflows for 3D generation, texturing, animation, and export."
+  "description": "Guide your agent through Tripo Studio MCP workflows for 3D generation, texturing, animation, and export.",
+  "author": {
+    "name": "VAST",
+    "url": "https://www.tripo3d.ai/"
+  },
+  "homepage": "https://studio.tripo3d.ai/"
 }

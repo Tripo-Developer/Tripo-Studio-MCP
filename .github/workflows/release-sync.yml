@@ -1,0 +1,67 @@
+name: Sync Skill Release to Registries
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to sync (e.g. v0.1.0). Defaults to the latest release or current manifest version."
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  sync-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || inputs.tag || github.ref }}
+          persist-credentials: false
+
+      - name: Validate package and version consistency
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+        run: |
+          python3 scripts/validate_package.py
+          python3 - <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          manifest_version = json.loads(Path("plugin.json").read_text())["version"]
+          tag = os.environ.get("RELEASE_TAG", "").strip()
+          if tag:
+              expected = tag[1:] if tag.startswith("v") else tag
+              if expected != manifest_version:
+                  sys.exit(f"Release tag {tag!r} does not match manifest version {manifest_version!r}")
+          print(f"Verified version {manifest_version}")
+          PY
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Publish Skill to ClawHub
+        if: env.CLAWHUB_TOKEN != ''
+        env:
+          CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
+          RELEASE_NOTES: ${{ github.event.release.body }}
+        run: |
+          VERSION=$(python3 -c 'import json; print(json.load(open("plugin.json"))["version"])')
+          CHANGELOG="${RELEASE_NOTES:-Release v${VERSION} of Tripo Studio MCP Skill}"
+          npx --yes clawhub login --token "$CLAWHUB_TOKEN"
+          npx --yes clawhub whoami
+          npx --yes clawhub skill publish ./skills/tripo-studio-mcp \
+            --slug tripo-studio-mcp \
+            --name "Tripo Studio MCP" \
+            --version "$VERSION" \
+            --changelog "$CHANGELOG"
+
+      - name: Trigger Skills.sh index refresh
+        run: |
+          TMP_DIR=$(mktemp -d)
+          cd "$TMP_DIR"
+          npx --yes skills add "${{ github.repository }}" --skill tripo-studio-mcp --yes --agent codex || true

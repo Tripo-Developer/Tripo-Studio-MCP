@@ -4,8 +4,23 @@
   "description": "Guide your agent through Tripo Studio MCP workflows for 3D generation, texturing, animation, and export.",
   "displayName": "Tripo Studio MCP",
   "author": {
-    "name": "Tripo"
+    "name": "VAST",
+    "url": "https://www.tripo3d.ai/"
   },
+  "homepage": "https://studio.tripo3d.ai/",
+  "repository": "https://github.com/Tripo-Developer/Tripo-Studio-MCP",
+  "logo": "assets/logo.png",
+  "keywords": [
+    "tripo",
+    "3d",
+    "mcp",
+    "model-generation",
+    "texturing",
+    "rigging",
+    "animation",
+    "gltf",
+    "blender"
+  ],
   "skills": [
     "./skills/tripo-studio-mcp"
   ]
