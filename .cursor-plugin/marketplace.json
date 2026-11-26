@@ -1,13 +1,35 @@
 {
   "name": "tripo-studio",
   "owner": {
-    "name": "Tripo"
+    "name": "VAST"
+  },
+  "metadata": {
+    "description": "Official Tripo Studio MCP Skill and plugin package for 3D generation, texturing, rigging, animation, and export."
   },
   "plugins": [
     {
       "name": "tripo-studio-mcp",
       "source": "./",
-      "description": "Guide your agent through Tripo Studio MCP workflows for 3D generation, texturing, animation, and export."
+      "description": "Guide your agent through Tripo Studio MCP workflows for 3D generation, texturing, animation, and export.",
+      "version": "0.1.0",
+      "author": {
+        "name": "VAST",
+        "url": "https://www.tripo3d.ai/"
+      },
+      "homepage": "https://studio.tripo3d.ai/",
+      "repository": "https://github.com/Tripo-Developer/Tripo-Studio-MCP",
+      "logo": "assets/logo.png",
+      "keywords": [
+        "tripo",
+        "3d",
+        "mcp",
+        "model-generation",
+        "texturing",
+        "rigging",
+        "animation",
+        "gltf",
+        "blender"
+      ]
     }
   ]
 }
