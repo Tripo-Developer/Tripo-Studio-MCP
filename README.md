@@ -19,6 +19,8 @@ Generation and editing depend on your Studio account permissions and available c
    npx skills add Tripo-Developer/Tripo-Studio-MCP --skill tripo-studio-mcp
    ```
 
+   You can also find this Skill in the [Skills.sh directory](https://www.skills.sh/tripo-developer/tripo-studio-mcp/tripo-studio-mcp).
+
    To target a specific client, add `-a codex`, `-a claude-code`, or `-a cursor`. The [installation guide](INSTALL.md) also covers native plugins, manual installation, and updates.
 
 2. **Connect to Tripo Studio MCP** in your client and authorize your account. Follow the [connection steps for your client](INSTALL.md#connect-to-tripo-studio-mcp).
